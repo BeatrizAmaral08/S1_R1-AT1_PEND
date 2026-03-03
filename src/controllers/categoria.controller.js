@@ -2,9 +2,9 @@ const categoriaController = {
 
     criarCategoria: async (req, res) => {
         try {
-            const { idCategoria, nomeCategoria } = req.body;
+            const { idCategoria, descricaoCategoria, dataCadastro } = req.body;
 
-            if (!idCategoria || !nomeCategoria) {
+            if (!idCategoria || !descricaoCategoria ||!dataCadastro) {
                 return res.status(400).json({
                     erro: "Campos obrigatórios não foram preenchidos"
                 });
@@ -20,7 +20,8 @@ const categoriaController = {
 
             const result = await categoriaModel.inserirCategoria(
                 idCategoria,
-                nomeCategoria
+                descricaoCategoria,
+                dataCadastro
             );
 
             return res.status(201).json({
@@ -64,5 +65,16 @@ const categoriaController = {
     }
 
 };
+
+atualizarCategoria: async (req, res) => {
+ try {
+            const { idCategoria } = req.params;
+            const { idCategoria, descricaoCategoria, dataCadastro } = req.body;
+
+            if (!idCategoria) {
+                return res.status(400).json({ erro: "ID da categoria é obrigatório" });
+            }
+}
+
 
 module.exports = { categoriaController };
